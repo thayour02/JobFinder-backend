@@ -17,7 +17,14 @@ require("./db/db")
 const app = express()
 
 //MIDDLEWARES
-app.use(cors({origin:"http://localhost:5173", credentials:true}))
+app.use(cors({
+    origin:"https://fluffy-cocada-7a48cc.netlify.app/", 
+    credentials:true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Authorization"],
+    maxAge: 3600, // Optional, specifies CORS configuration cache duration
+  }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
