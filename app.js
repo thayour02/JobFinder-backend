@@ -18,7 +18,7 @@ const app = express()
 
 //MIDDLEWARES
 app.use(cors({
-    origin:"https://fluffy-cocada-7a48cc.netlify.app/", 
+    origin:"https://fluffy-cocada-7a48cc.netlify.app", 
     credentials:true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
