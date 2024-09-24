@@ -110,6 +110,7 @@ const signIn = async (req, res, next) => {
         user.lastLogin = new Date()
         await user.save();
 
+        
         res.status(200).json({
             success: true,
             message: "login successfully",

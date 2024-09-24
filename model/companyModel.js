@@ -21,7 +21,7 @@ const companySchema = new mongoose.Schema({
     },
     // contact:{
     //     type:String,
-    //     match: /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    //     match: /^\+?[1-9]\d{1,14}$/
     // },
     location:{type:String},
     about:{type:String},
