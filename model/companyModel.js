@@ -19,10 +19,10 @@ const companySchema = new mongoose.Schema({
         minlength:[6, "password must be atleast"],
         select:true
     },
-    // contact:{
-    //     type:String,
-    //     match: /^\+?[1-9]\d{1,14}$/
-    // },
+    contact:{
+        type:String,
+        match: /^\+?[1-9]\d{1,14}$/
+    },
     location:{type:String},
     about:{type:String},
     profileUrl:{type:String},

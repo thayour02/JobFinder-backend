@@ -54,9 +54,7 @@ const sendWelcomeEmail = async (email, name) => {
 
 
 const sendResetPasswordMail = async (user) => {
-
     const generateResetToken = crypto.randomBytes(20).toString('hex');
-
     const transporter = createMailTransport()
     const mailOptions = {
         from: `"Job-Finder" <tayoapp1990@gmail.com>`,

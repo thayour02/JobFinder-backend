@@ -26,10 +26,10 @@ const userSchema = new mongoose.Schema({
         default:"Seeker",
         enum: ['Seeker', 'company'],
     },
-  //   contact:{
-  //     type:String,
-  //     match: /^\+?[1-9]\d{1,14}$/
-  // },
+    contact:{
+      type:String,
+      match: /^\+?[1-9]\d{1,14}$/
+  },
     location:{type:String},
     application:[{type: Schema.Types.ObjectId, ref: "Application" }],
     company:{ type: Schema.Types.ObjectId, ref: "Company" },
