@@ -9,9 +9,8 @@ require("dotenv").config()
 const sendVerificationMail = (user) => {
     const transporter = createMailTransport()
     const EmailVerificationToken = crypto.randomBytes(64).toString('hex')
-
     const mailOptions = {
-        from: `"Job-Finder" <tayoapp1990@gmail.com>`,
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
         to: user?.email,
         subject: "verify your mail",
         html: `<p>verify your email address to complete the registration and login into your account.</p>
@@ -35,7 +34,7 @@ const sendWelcomeEmail = async (email, name) => {
    try {
     const transporter = createMailTransport()
     const mailOptions = {
-        from: `"Job-Finder" <tayoapp1990@gmail.com>`,
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
         to: user?.email,
         subject: "verify your mail",
         html: `<p>Welcome 👍 ${user?.name} Your account has been created successfully 👋 `,    
@@ -57,7 +56,7 @@ const sendResetPasswordMail = async (user) => {
     const generateResetToken = crypto.randomBytes(20).toString('hex');
     const transporter = createMailTransport()
     const mailOptions = {
-        from: `"Job-Finder" <tayoapp1990@gmail.com>`,
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
         to: user?.email,
         subject: "reset Password",
         html:  `<p>Reset your password: 
@@ -77,7 +76,7 @@ const sendResetPasswordMail = async (user) => {
 const sendSuccessResetPasswordMail = async (user) => {
     const transporter = createMailTransport()
     const mailOptions = {
-        from: `"Job-Finder" <tayoapp1990@gmail.com>`,
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
         to: user?.email,
         subject: "reset Password",
         html: `You have reset password successfully`

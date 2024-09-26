@@ -9,7 +9,7 @@ const createMailTransport =()=>{
         post:Number(process.env.EMAIL_PORT),
         secure:Boolean(process.env.SECURE),
         auth: {
-          user: "tayoapp1990@gmail.com",
+          user: "jobfinder0205@gmail.com",
           pass: process.env.EMAIL_PASS,
         },
       });
