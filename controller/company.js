@@ -24,7 +24,7 @@ const register = async (req, res, next) => {
         //existing user
         const existingCompany = await Company.findOne({ email })
         if (existingCompany) {
-            return res.status(401).send('email already exist')
+            return res.status(400).json({ message: 'Email is already registered', success: false })
         }
 
         const hashPassword = await bcrypt.hash(password, 10)
@@ -166,7 +166,6 @@ const signIn = async (req, res, next) => {
         if (!company) {
             return res.status(404).send('No account with this mail')
         }
-
         // if password is matched
         const isMatch = bcrypt.compare(password, company.password)
         if (!isMatch) {
