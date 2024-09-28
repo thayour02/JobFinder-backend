@@ -167,12 +167,12 @@ const signIn = async (req, res, next) => {
         // check if email is registered
         const company = await Company.findOne({ email })
         if (!company) {
-            return res.status(404).send('No account with this mail')
+            return res.status(400).json({ message: 'invalid details', success: false })
         }
         // if password is matched
         const isMatch = bcrypt.compare(password, company.password)
         if (!isMatch) {
-            return res.status(404).send('invalid details')
+            return res.status(400).json({ message: 'invalid details', success: false })
         }
         const token = await company.createJWT(res, company._id)
 
@@ -180,7 +180,7 @@ const signIn = async (req, res, next) => {
         await company.save()
 
 
-        res.status(201).send({
+        res.status(201).json({
             success: true,
             message: "Login Successfully",
             user: {
