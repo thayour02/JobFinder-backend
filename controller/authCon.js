@@ -81,7 +81,6 @@ const verifyMail = async (req, res, next) => {
             }
         })
     } catch (error) {
-        console.log(error)
         res.status(500).json({ success: false, message: "server error", error })
     }
 }

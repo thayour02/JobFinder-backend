@@ -59,16 +59,18 @@ const register = async (req, res, next) => {
 
 }
 
+// const register = 
+
 const verifyCompanyMail = async (req, res, next) => {
     const {token,id} = req.params
     try {
         const account = await Company.findByIdAndUpdate({ _id: id }, { EmailVerificationToken: token })
-        console.log(account)
+
         if (!account) {
             return res.status(400).json({ success: false, message: "invalid or expire code" })
         }
 
-        account.isVerified = true,
+            account.isVerified = true,
             account.EmailVerificationToken = undefined,
             account.EmailVerificationTokenExpireAt = undefined
 
@@ -76,16 +78,17 @@ const verifyCompanyMail = async (req, res, next) => {
 
         await sendWelcomeEmail(account.email, account.name)
 
-        res.status(200).json({
+        res.status(201).json({
             success: true,
-            message: `you're verified`,
-            user: {
+            message: "email verify successfully",
+            account: {
                 ...account._doc,
                 password: undefined
             }
         })
     } catch (error) {
-        console.log(error)
+        res.status(500).json({ success: false, message: "server error", error })
+
     }
 }
 
