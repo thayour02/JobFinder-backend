@@ -32,7 +32,7 @@ const register = async (req, res, next) => {
         const EmailVerificationToken = crypto.randomBytes(64).toString('hex')
 
         //create new user
-        const user = await Company.create({
+        const account = await Company.create({
             name,
             email,
             password: hashPassword,
@@ -42,13 +42,13 @@ const register = async (req, res, next) => {
             EmailVerificationTokenExpireAt: Date.now() + 24 * 60 * 60 * 1000 //24hrs
         })
         // user token
-        const token = await user.createJWT(res, account._id);
-        await sendCompanyVerificationMail(user, EmailVerificationToken)
+        const token = await account.createJWT(res, account._id);
+        await sendCompanyVerificationMail(account, EmailVerificationToken)
         res.status(201).send({
             success: true,
             message: "Company Account Create Successfully",
-            user: {
-                ...user._doc,
+            account: {
+                ...account._doc,
                 password: undefined,
             },
             token,
