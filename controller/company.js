@@ -4,7 +4,7 @@ const crypto = require('crypto')
 const Company = require('../model/companyModel.js')
 
 // const generateVerificationToken = require('../middleware/generateVerificationCode.js')
-const { sendVerificationMail, sendWelcomeEmail, sendResetPasswordMail, sendSuccessResetPasswordMail } = require('../mailtrap/mails.js')
+const { sendCompanyVerificationMail, sendWelcomeEmail, sendResetPasswordMail, sendSuccessResetPasswordMail } = require('../mailtrap/mails.js')
 
 
 const register = async (req, res, next) => {
@@ -43,7 +43,7 @@ const register = async (req, res, next) => {
         })
         // user token
         const token = await account.createJWT(res, account._id);
-        await sendVerificationMail(account, EmailVerificationToken)
+        await sendCompanyVerificationMail(account, EmailVerificationToken)
         res.status(201).send({
             success: true,
             message: "Company Account Create Successfully",
