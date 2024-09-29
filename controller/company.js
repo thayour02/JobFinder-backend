@@ -267,7 +267,19 @@ const deleteProfile = async (req, res) => {
 const getCompanyProfile = async (req, res, next) => {
     try {
         const id = req.body.user.userId
-        const company = await Company.findById({ _id: id })
+        const company = await Company.findById({ _id: id }).populate({
+            path: 'job',
+            select: 'job status appliedAt',
+            populate: [
+                {
+                    path: 'application',
+                    populate: {
+                        path: "company",
+                        select: 'name email profileUrl'
+                    }
+                }
+            ]
+        });
 
         if (!company)
             return res.status(404).send('No Company found')
