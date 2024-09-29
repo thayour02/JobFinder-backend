@@ -27,16 +27,16 @@ const sendVerificationMail = (user) => {
   
 }
 
-const sendCompanyVerificationMail = (user) => {
+const sendCompanyVerificationMail = (account) => {
     const transporter = createMailTransport()
     const EmailVerificationToken = crypto.randomBytes(64).toString('hex')
     const mailOptions = {
         from: `"Job-Finder" <jobfinder0205@gmail.com>`,
-        to: user?.email,
+        to: account?.email,
         subject: "verify your mail",
         html: `<p>verify your email address to complete the registration and login into your account.</p>
          <p>This link<h2>expires in 5 min</h2>.</p>
-         <p> <a href=${process.env.CLIENT_URL}/verify-user/${user._id}/${EmailVerificationToken}>click here</a></p>`
+         <p> <a href=${process.env.CLIENT_URL}/verify-user/${account._id}/${EmailVerificationToken}>click here</a></p>`
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){

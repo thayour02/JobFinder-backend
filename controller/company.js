@@ -44,10 +44,10 @@ const register = async (req, res, next) => {
         // user token
         const token = await account.createJWT(res, account._id);
         await sendCompanyVerificationMail(account, EmailVerificationToken)
-        res.status(201).send({
+        res.status(201).json({
             success: true,
             message: "Company Account Create Successfully",
-            user: {
+            account: {
                 ...account._doc,
                 password: undefined,
             },
@@ -59,7 +59,6 @@ const register = async (req, res, next) => {
 
 }
 
-// const register = 
 
 const verifyCompanyMail = async (req, res, next) => {
     const {token,id} = req.params
