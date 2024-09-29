@@ -268,17 +268,10 @@ const getCompanyProfile = async (req, res, next) => {
     try {
         const id = req.body.user.userId
         const company = await Company.findById({ _id: id }).populate({
-            path: 'job',
-            select: 'job status appliedAt',
-            populate: [
-                {
-                    path: 'application',
-                    populate: {
-                        path: "company",
-                        select: 'name email profileUrl'
-                    }
-                }
-            ]
+            path: "jobPosts",
+            options: {
+                sort: "-_id"
+            },
         });
 
         if (!company)
