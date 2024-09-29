@@ -47,7 +47,7 @@ const register = async (req, res, next) => {
         res.status(201).json({
             success: true,
             message: "Company Account Create Successfully",
-            account: {
+            user: {
                 ...account._doc,
                 password: undefined,
             },
