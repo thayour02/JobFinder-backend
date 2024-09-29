@@ -243,13 +243,12 @@ const updateCompanyProfile = async (req, res, next) => {
 }
 const deleteProfile = async (req, res) => {
     try {
-        const { id } = req.params
+        const { id } = req.body.user.userId
 
         const com = await Company.findById(id)
         if (!com) {
             return res.status(404).json({ message: "Company  Not Found" })
         }
-
         await Company.findByIdAndDelete(id)
 
         // Delete job posts from Job collection
@@ -273,7 +272,6 @@ const getCompanyProfile = async (req, res, next) => {
         if (!company)
             return res.status(404).send('No Company found')
 
-        console.log(company)
         company.password = undefined
         res.status(201).json({
             success: true,
