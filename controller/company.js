@@ -243,9 +243,10 @@ const updateCompanyProfile = async (req, res, next) => {
 }
 const deleteProfile = async (req, res) => {
     try {
-        const { id } = req.body.user.userId
+        const  id  = req.body.user.userId
 
         const com = await Company.findById(id)
+
         if (!com) {
             return res.status(404).json({ message: "Company  Not Found" })
         }
@@ -254,12 +255,10 @@ const deleteProfile = async (req, res) => {
         // Delete job posts from Job collection
         await Jobs.deleteMany({ company: id });
 
-        res.status(202).json({
+       return  res.status(201).json({
             success: true,
             message: "Job deleted Successfully",
         })
-
-
     } catch (error) {
         return res.status(404).json({ message: error.message })
     }
