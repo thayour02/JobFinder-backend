@@ -80,7 +80,7 @@ const verifyCompanyMail = async (req, res, next) => {
         res.status(201).json({
             success: true,
             message: "email verify successfully",
-            user: {
+            user:{
                 ...account._doc,
                 password: undefined
             }

@@ -32,7 +32,7 @@ const {
     //UPDATE
     router.put('/update-profile',userAuth,  updateCompanyProfile)
     //GET DATA
-    router.post('/get-company-profile',  getCompanyProfile)
+    router.get('/get-company-profile',userAuth,  getCompanyProfile)
     router.get("/company", getCompanies)
     router.get("/get-joblist", userAuth, getJoblist)
     router.get("/get-company/:id", getCompanyById)

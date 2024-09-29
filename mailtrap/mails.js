@@ -14,7 +14,7 @@ const sendVerificationMail = (user) => {
         to: user?.email,
         subject: "verify your mail",
         html: `<p>verify your email address to complete the registration and login into your account.</p>
-         <p>This link<h2>expires in 5 min</h2>.</p>
+         <p>This link<h2>expires in 24hrs</h2>.</p>
          <p> <a href=${process.env.CLIENT_URL}/verify-email/${user._id}/${EmailVerificationToken}>click here</a></p>`
     }
     transporter.sendMail(mailOptions,(error,info)=>{
@@ -35,7 +35,7 @@ const sendCompanyVerificationMail = (account) => {
         to: account?.email,
         subject: "verify your mail",
         html: `<p>verify your email address to complete the registration and login into your account.</p>
-         <p>This link<h2>expires in 5 min</h2>.</p>
+         <p>This link<h2>expires in 24hrs </h2>.</p>
          <p> <a href=${process.env.CLIENT_URL}/verify-user/${account._id}/${EmailVerificationToken}>click here</a></p>`
     }
     transporter.sendMail(mailOptions,(error,info)=>{

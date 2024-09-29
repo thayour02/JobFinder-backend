@@ -59,8 +59,7 @@ const verifyMail = async (req, res, next) => {
 
     try {
         const user = await User.findByIdAndUpdate({_id:id},{EmailVerificationToken:token})
-        // EmailVerificationToken:token,
-        // EmailVerificationTokenExpireAt: { $gt: Date.now() }
+        
         if (!user) {
             return res.status(400).json({ success: false, message: "invalid or code expired" })
         }
