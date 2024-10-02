@@ -122,25 +122,21 @@ const forgetPassword = async (req, res, next) => {
 }
 
 const resetPassword = async (req, res, next) => {
-    const { token } = req.params
+    const { id } = req.params
     const { password } = req.body
 
     try {
-        const account = await Company.findOne({
-            resetPasswordToken: token,
-            resetPasswordExpireAt: { $gt: Date.now() }
-        })
+        
+        const hashPassword = await bcrypt.hash(password, 10)
+        const account = await Company.findByIdAndUpdate({_id:id},{password: hashPassword})
         if (!account) {
             return res.status(400).json({ success: false, message: 'invalid or expire link' })
         }
-        const hashPassword = await bcrypt.hash(password, 10)
-        account.resetPasswordToken = undefined
-        account.resetPasswordExpireAt = undefined
-        account.password = hashPassword
+        console.log(account)
 
         await account.save()
 
-        await sendResetPasswordEmail(account.email)
+        await sendResetPasswordEmail(account)
         res.status(200).json({
             success: true,
             message: "password reset succefully",
