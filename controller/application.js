@@ -15,7 +15,7 @@ const apply = async (req, res) => {
         if (alreadyApply) {
             return res.status(400).json({
                 success: false,
-                message: "user already apply for this job"
+                message: "User already apply for this job"
             })
         }
 
@@ -30,13 +30,13 @@ const apply = async (req, res) => {
 
         const user = await User.findById(userId)
         if (!user) {
-            return res.status(404).json({
+            return res.status(401).json({
                 success: false,
                 message: "User Not Found....Create a seeker account to apply for job"
             })
         }
         if (user.accountType !== "Seeker") {
-            return res.status(500).json({
+            return res.status(401).json({
                 success: false,
                 message: "Your account cannot apply for a job"
             })
@@ -157,7 +157,7 @@ const updateApplication = async (req, res) => {
             return res.status(404).json({ message: 'application not found' })
         }
         await application.save();
-        return  res.status(200).json({
+        return  res.status(202).json({
             success: true,
             message: `Your Job Application is ${status}`,
             application
