@@ -157,7 +157,7 @@ const updateApplication = async (req, res) => {
             return res.status(404).json({ message: 'application not found' })
         }
         await application.save();
-        res.status(200).json({
+        return  res.status(200).json({
             success: true,
             message: `Your Job Application is ${status}`,
             application
