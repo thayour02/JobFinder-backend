@@ -92,6 +92,26 @@ const sendResetPasswordMail = async (user) => {
     })
 }
 
+const sendResetPasswordEmail = async (account) => {
+    const generateResetToken = crypto.randomBytes(20).toString('hex');
+    const transporter = createMailTransport()
+    const mailOptions = {
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
+        to: account?.email,
+        subject: "reset Password",
+        html:  `<p>Reset your password: 
+        <a href="${process.env.CLIENT_URL}/reset-password/${account._id}/${generateResetToken}" target="_blank">Click here</a></p> `,
+  
+    }
+    transporter.sendMail(mailOptions,(error,info)=>{
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Verification email sent")
+        }
+    })
+}
+
 
 const sendSuccessResetPasswordMail = async (user) => {
     const transporter = createMailTransport()
@@ -110,4 +130,29 @@ const sendSuccessResetPasswordMail = async (user) => {
         }
     })
 }
-module.exports = { sendVerificationMail,sendCompanyVerificationMail, sendResetPasswordMail,sendSuccessResetPasswordMail,  sendWelcomeEmail,sendSuccessResetPasswordMail}
+
+const sendSuccessResetPasswordEmail = async (account) => {
+    const transporter = createMailTransport()
+    const mailOptions = {
+        from: `"Job-Finder" <jobfinder0205@gmail.com>`,
+        to: account?.email,
+        subject: "reset Password",
+        html: `You have reset password successfully`
+    }
+    // console.log(mailOptions)
+    transporter.sendMail(mailOptions,(error,info)=>{
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Verification email sent")
+        }
+    })
+}
+module.exports = {sendVerificationMail,
+    sendCompanyVerificationMail,
+     sendResetPasswordMail,
+     sendSuccessResetPasswordMail,
+       sendWelcomeEmail,
+       sendSuccessResetPasswordMail,
+       sendResetPasswordEmail,
+       sendSuccessResetPasswordEmail}

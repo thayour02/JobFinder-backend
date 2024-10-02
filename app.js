@@ -25,6 +25,7 @@ app.use(cors({
     exposedHeaders: ["Authorization"],
     maxAge: 3600, // Optional, specifies CORS configuration cache duration
   }))
+  
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())

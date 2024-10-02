@@ -16,4 +16,5 @@ router.get("/applicant/:applicationId/:userId", userAuth, getApplicantById)
 router.put('/update-application/:applicationId/:userId', userAuth, updateApplication)
 
 router.delete("/delete-application/:applicationId/:userId/:jobId", deleteApplication)
+
 module.exports = router

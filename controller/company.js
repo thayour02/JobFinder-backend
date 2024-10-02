@@ -4,7 +4,7 @@ const crypto = require('crypto')
 const Company = require('../model/companyModel.js')
 
 // const generateVerificationToken = require('../middleware/generateVerificationCode.js')
-const { sendCompanyVerificationMail, sendWelcomeEmail, sendResetPasswordMail, sendSuccessResetPasswordMail } = require('../mailtrap/mails.js')
+const { sendCompanyVerificationMail, sendWelcomeEmail, sendResetPasswordEmail, sendSuccessResetPasswordMail } = require('../mailtrap/mails.js')
 
 
 const register = async (req, res, next) => {
@@ -98,7 +98,6 @@ const logOut = async (req, res, next) => {
 
 const forgetPassword = async (req, res, next) => {
     const { email } = req.body
-
     try {
         const account = await Company.findOne({ email })
 
@@ -114,7 +113,7 @@ const forgetPassword = async (req, res, next) => {
 
         await account.save()
 
-        await sendResetPasswordMail(account)
+        await sendResetPasswordEmail(account)
         res.status(200).json({ success: true, message: "Password Reset Link sent to yout email" })
     } catch (error) {
         console.log(error)
@@ -141,7 +140,7 @@ const resetPassword = async (req, res, next) => {
 
         await account.save()
 
-        await sendResetPasswordMail(account.email)
+        await sendResetPasswordEmail(account.email)
         res.status(200).json({
             success: true,
             message: "password reset succefully",
@@ -366,8 +365,6 @@ const getJoblist = async (req, res, next) => {
         if (sort === "Z-A") {
             sorting = "name"
         }
-
-
         let queryResult = await Company.findById({ _id: id }).populate({
             path: "jobPosts",
             options: { sort: sorting }
