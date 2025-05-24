@@ -7,7 +7,7 @@ const companyRoutes = require('./routes/companyRoutes')
 const userRoute = require('./routes/userRoute')
 const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoute')
-const job = require('./middleware/cron')
+const job = require('./middleware/cron.js')
 require('dotenv').config()
 
 
@@ -27,13 +27,14 @@ app.use(cors({
     maxAge: 3600, // Optional, specifies CORS configuration cache duration
   }))
   
+job.start()
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-job.start()
 
 app.use('/api/user',authRoutes)
 app.use('/api',companyRoutes)
