@@ -37,6 +37,7 @@ const register = async (req, res, next) => {
 
         //create token
         const token = await user.createJWT(res, user._id)
+        
         await sendVerificationMail(user, EmailVerificationToken)
         res.status(201).json({
             success: true,
@@ -105,6 +106,7 @@ const signIn = async (req, res, next) => {
             return res.status(400).json({ message: 'invalid details', success: false })
         }
         const token = await user.createJWT(res, user._id)
+
         user.lastLogin = new Date()
         await user.save();
 

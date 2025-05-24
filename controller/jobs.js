@@ -5,7 +5,8 @@ const Application = require('../model/applicationModel.js')
 
 const createJob = async (req, res, next) => {
     try {
-        const { jobTitle,
+        const { 
+            jobTitle,
             jobType,
             location,
             salary,
@@ -21,6 +22,7 @@ const createJob = async (req, res, next) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).send(`No account for this id:${id}`)
         }
+
         //creating jobs and save it
         const jobPost = new Jobs({
             jobTitle, jobType,
@@ -33,6 +35,7 @@ const createJob = async (req, res, next) => {
 
         // update company information with job id
         const company = await Company.findById(id)
+        
         company.jobPosts.push(jobPost._id)
 
         const updateCompany = await Company.findByIdAndUpdate(id, company,
@@ -58,6 +61,7 @@ const updateJobs = async (req, res, next) => {
         } = req.body;
 
         const { jobPostId } = req.params;
+        
         if (
             !jobTitle ||
             !jobType ||
@@ -118,7 +122,7 @@ const getJobPost = async (req, res, next) => {
             queryObj.jobType = { $in: types }
         }
 
-        //fiterby Experienc
+        //fiterby Experience
         if (exp) {
             queryObj.experience = {
                 $gte: Number(experience[0]) - 1,
@@ -157,7 +161,7 @@ const getJobPost = async (req, res, next) => {
 
         //PAGINATION
         const page = Number(req.query.page) || 1;
-        const limit = Number(req.query.limit) || 9;
+        const limit = Number(req.query.limit) || 10;
 
         const skip = (page - 1) * limit;
 
@@ -264,6 +268,7 @@ const getJobById = async (req, res, next) => {
 const getApplicantsForAjob = async (req,res)=>{
     try {
         const jobId = req.params.id;
+        
         const applications = await Application.find({ job: jobId })
             .populate('user'); // Populate user details
         return res.status(200).send({

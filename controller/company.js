@@ -198,11 +198,7 @@ const updateCompanyProfile = async (req, res, next) => {
         profileUrl,
         about, url } = req.body
     try {
-        //validate
-        // if (!name || !email || !contact || !location || profileUrl || jobPost || !about ) {
-        //     return res.status(404).send("Please Provide all required fields")
-        // }
-        //find id from mongoose
+        
         const id = req.body.user.userId
         if (!mongoose.Types.ObjectId.isValid(id))
             return res.status(404).send(`No Company with: ${id}`

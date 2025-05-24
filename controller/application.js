@@ -7,6 +7,7 @@ const Company = require('../model/companyModel')
 const apply = async (req, res) => {
     try {
         const { resume, coverLetter, appliedAt } = req.body
+        
         const userId = req.params.userId
         const jobId = req.params.jobId
 
@@ -57,17 +58,7 @@ const apply = async (req, res) => {
             $push: { application: application._id }
         }, { new: true })
 
-        //   Create notification for the company
-
-        //  const jobb = await Jobs.findById(jobId).populate('company');
-        //  const comp = job.company;
-
-        //  const companyNotification = new Notification({
-        //      user: comp._id,
-        //      message: `New application received for job: ${jobTitle}`
-        //  });
-
-        //  await companyNotification.save();
+     
 
         return res.status(200).send({
             sucess: true,
@@ -83,6 +74,7 @@ const apply = async (req, res) => {
 const getApplicationDetails = async (req, res) => {
     try {
         const applicationId = req.params.id; //  get the application ID from the request parameters url
+        
         const application = await Application.findById(applicationId)
             .populate('user') // Populate user details, specify fields you want
             .populate('job'); // Populate job details, specify fields you want
@@ -125,6 +117,7 @@ const getAllApplications = async (req, res) => {
         });
     }
 };
+
 const getApplicantById = async (req, res) => {
     const {applicationId, userId} = req.params
 
@@ -149,6 +142,7 @@ const getApplicantById = async (req, res) => {
 
 const updateApplication = async (req, res) => {
     const {  applicationId,userId } = req.params
+    
     const { status } = req.body;
     try {
         const application = await Application.findByIdAndUpdate({ _id: applicationId,userId }, { status }, { new: true });
