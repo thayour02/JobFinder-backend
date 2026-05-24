@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
             return res.status(400).json({ message: 'Email is already registered', success: false })
         }
 
-        const hashPassword = await bcrypt.hash(password, 10)
+        const hashPassword = await bcrypt.hash(password, 12)
         // const verificationToken = generateVerificationToken()
         const EmailVerificationToken = crypto.randomBytes(64).toString('hex')
 
@@ -116,8 +116,7 @@ const forgetPassword = async (req, res, next) => {
         await sendResetPasswordEmail(account)
         res.status(200).json({ success: true, message: "Password Reset Link sent to yout email" })
     } catch (error) {
-        console.log(error)
-    }
+            }
 
 }
 
@@ -127,13 +126,12 @@ const resetPassword = async (req, res, next) => {
 
     try {
         
-        const hashPassword = await bcrypt.hash(password, 10)
+        const hashPassword = await bcrypt.hash(password, 12)
         const account = await Company.findByIdAndUpdate({_id:id},{password: hashPassword})
         if (!account) {
             return res.status(400).json({ success: false, message: 'invalid or expire link' })
         }
-        console.log(account)
-
+        
         await account.save()
 
         await sendResetPasswordEmail(account)
@@ -146,8 +144,7 @@ const resetPassword = async (req, res, next) => {
             }
         })
     } catch (error) {
-        console.log(error)
-    }
+            }
 }
 
 const signIn = async (req, res, next) => {
@@ -186,8 +183,7 @@ const signIn = async (req, res, next) => {
 
 
     } catch (error) {
-        console.log(error)
-        return res.status(404).json({ message: error.message })
+                return res.status(404).json({ message: error.message })
     }
 }
 

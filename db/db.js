@@ -8,4 +8,9 @@ const database = process.env.URI_STRING
 
 mongoose.connect(
 database
-).then(()=>console.log('database is connected')).catch((error)=> console.log("unable to connect to database",error))
+).then(()=>{
+   console.log("Database connected successfully")
+}).catch((error)=> {
+    // Database connection error
+    process.exit(1)
+})

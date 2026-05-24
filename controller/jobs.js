@@ -48,8 +48,7 @@ const createJob = async (req, res, next) => {
         })
 
     } catch (error) {
-        console.log(error)
-        return res.status(404).json({ message: error.message })
+                return res.status(404).json({ message: error.message })
     }
 }
 

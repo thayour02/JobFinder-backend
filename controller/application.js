@@ -157,8 +157,7 @@ const updateApplication = async (req, res) => {
             application
         })
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error updating application status' });
+                res.status(500).json({ message: 'Error updating application status' });
     }
 };
 

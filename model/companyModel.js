@@ -3,6 +3,7 @@ const Schema = require('mongoose')
 const JWT = require('jsonwebtoken')
 
 
+
 const companySchema = new mongoose.Schema({
     name:{
         type:String,

@@ -19,10 +19,8 @@ const sendVerificationMail = (user) => {
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
   
 }
@@ -40,17 +38,14 @@ const sendCompanyVerificationMail = (account) => {
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
   
 }
 
 
 const sendWelcomeEmail = async (email, name) => {
-
    try {
     const transporter = createMailTransport()
     const mailOptions = {
@@ -85,10 +80,8 @@ const sendResetPasswordMail = async (user) => {
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
 }
 
@@ -105,10 +98,8 @@ const sendResetPasswordEmail = async (account) => {
     }
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
 }
 
@@ -121,13 +112,10 @@ const sendSuccessResetPasswordMail = async (user) => {
         subject: "reset Password",
         html: `You have reset password successfully`
     }
-    console.log(mailOptions)
-    transporter.sendMail(mailOptions,(error,info)=>{
+        transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
 }
 
@@ -139,13 +127,10 @@ const sendSuccessResetPasswordEmail = async (account) => {
         subject: "reset Password",
         html: `You have reset password successfully`
     }
-    // console.log(mailOptions)
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(error);
-        }else{
-            console.log("Verification email sent")
-        }
+                    }else{
+                    }
     })
 }
 module.exports = {sendVerificationMail,

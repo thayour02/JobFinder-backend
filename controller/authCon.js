@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
             return res.status(400).json({ message: 'Email is already registered', success: false })
         }
 
-        const hashPassword = await bcrypt.hash(password, 10)
+        const hashPassword = await bcrypt.hash(password, 12)
 
         // const verificationToken = generateVerificationCode();
 
@@ -34,7 +34,7 @@ const register = async (req, res, next) => {
             EmailVerificationToken,
             EmailVerificationTokenExpireAt
         });
-
+console.log(user)
         //create token
         const token = await user.createJWT(res, user._id)
         
@@ -50,8 +50,7 @@ const register = async (req, res, next) => {
         })
 
     } catch (error) {
-        console.log(error)
-        return res.status(404).json({ message: error.message })
+                return res.status(404).json({ message: error.message })
     }
 }
 
@@ -148,8 +147,7 @@ const forgetPassword = async (req, res, next) => {
         res.status(200).json({ success: true, message: `Password Reset Link sent to your email ${user?.email}` })
 
     } catch (error) {
-        console.log(error)
-        res.status(400).json({ success: false, message: "fail to reset password" })
+                res.status(400).json({ success: false, message: "fail to reset password" })
 
     }
 }
@@ -159,7 +157,7 @@ const resetPassword = async (req, res, next) => {
         const { token,id } = req.params;
         const { password } = req.body;
       
-        const hashPassword = await bcrypt.hash(password, 10);
+        const hashPassword = await bcrypt.hash(password, 12);
         const user = await User.findByIdAndUpdate({ _id: id }, {password: hashPassword})
         if (!user) {
             return res.status(400).json({ success: false, message: "Invalid or expire reset token" })

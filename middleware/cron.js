@@ -1,20 +1,19 @@
-
 const cron = require("cron")
-const https = require("https")
+const User = require('../model/userModel')
 require('dotenv').config()
 
 
+const job = new cron.CronJob('*/10 * * * *', async () => {
+        try {
+        // Simple database query to keep connection alive
+        await User.countDocuments();
+        console.log('keeping the server alive')
+            } catch (error) {
+                console.log(error.message)
+            }
+});
+   
+  
 
-const job = new cron.CronJob("*/14 * * * *", function() {
-    https
-    .get(process.env.API_URL, (res)=>{
-        if(res.statusCode === 200)console.log("GET request sent succesfully");
-        else console.log("Error in GET request", res.statusCode, res.statusMessage);
-    })
-    .on("error", (e)=>{
-        console.log("Error sending GET request", e);
-    })
 
-})
-
-module.exports =  job;
+module.exports =  { job };
