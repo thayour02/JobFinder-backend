@@ -34,7 +34,6 @@ const register = async (req, res, next) => {
             EmailVerificationToken,
             EmailVerificationTokenExpireAt
         });
-console.log(user)
         //create token
         const token = await user.createJWT(res, user._id)
         
