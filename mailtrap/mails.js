@@ -1,6 +1,4 @@
-import resend from './transporter'
-import crypto from 'crypto'
-import user from '../model/user'
+const  resend = require ('./createTransporter')
 
 const sendVerificationMail = async (user, emailVerificationToken) => {
     const verificationUrl = `${process.env.CLIENT_URL?.replace(/\/$/, '')}/verify-email/${user._id}/${emailVerificationToken}`;
@@ -154,4 +152,4 @@ const sendWelcomeEmail = async (email, name) => {
    }
 }
 
-export { sendVerificationMail, sendWelcomeEmail }
+module.exports=  { sendVerificationMail, sendWelcomeEmail }
