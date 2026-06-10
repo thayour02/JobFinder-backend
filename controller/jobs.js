@@ -168,7 +168,7 @@ const getJobPost = async (req, res, next) => {
         const total = await Jobs.countDocuments(queryResult);
         const numPage = Math.ceil(total / limit)
 
-        queryResult = queryResult.limit(limit * page)
+        queryResult = queryResult.skip(skip).limit(limit)
 
         const jobs = await queryResult;
 
@@ -183,6 +183,7 @@ const getJobPost = async (req, res, next) => {
         return res.status(404).json({ message: error.message })
     }
 }
+
 
 const deleteJob = async (req, res, next) => {
     try {

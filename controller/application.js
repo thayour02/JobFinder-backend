@@ -19,6 +19,7 @@ const apply = async (req, res) => {
                 message: "User already apply for this job"
             })
         }
+        
 
         // find if job is available for application
         const job = await Jobs.findById(jobId)
@@ -46,6 +47,8 @@ const apply = async (req, res) => {
         const application = new Application({
             user: { ...user._doc },
             job: job._id,
+            resume: resume || user.userCv,
+            coverLetter,
             appliedAt: new Date()
         });
         await application.save();

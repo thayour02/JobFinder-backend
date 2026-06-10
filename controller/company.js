@@ -314,7 +314,7 @@ const getCompanies = async (req, res, next) => {
         const total = await Company.countDocuments(queryResult);
         const numPage = Math.ceil(total / limit)
 
-        queryResult = queryResult.limit(limit * page)
+        queryResult = queryResult.skip(skip).limit(limit)
 
         const company = await queryResult;
         res.status(200).json({

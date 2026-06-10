@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        required:[true, "Company email is Required"],
+        required:[true, "email is Required"],
         unique:true,
     },
     accountType:{type:String,
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     },
     contact:{
       type:String,
-      match: /^\+?[1-9]\d{1,14}$/
+      // match: /^\+?[1-9]\d{1,14}$/
   },
     location:{type:String},
     application:[{type: Schema.Types.ObjectId, ref: "Application" }],
