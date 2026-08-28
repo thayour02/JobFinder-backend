@@ -11,6 +11,6 @@ database
 ).then(()=>{
    console.log("Database connected successfully")
 }).catch((error)=> {
-    // Database connection error
-    process.exit(1)
+    console.error("Database connection failed:", error.message);
+    process.exit(1);
 })
